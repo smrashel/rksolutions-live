@@ -1,0 +1,109 @@
+{% load static %}
+  <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'home' %}">
+          <div class="sidebar-brand-icon">
+
+          {% if user.company_name.company_logo %}
+            <img src="{{ user.company_name.company_logo.url }}" id="logo" alt="logo"  width="100" height="40">
+          {% else %}
+            <img src="{% static 'img/logo.png' %}" id="logo" alt="logo"  width="100" height="40">
+          {% endif %}
+
+            
+          </div>
+          <div class="sidebar-brand-text mx-3"></div>
+        </a>
+  
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+  
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'home' %}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+        </li>
+  
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+        
+        {% for group in user.groups.all %}
+        {% if group.name == 'admin'%}
+        <!-- Heading -->
+        <div class="sidebar-heading">
+          Admin
+        </div>
+  
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#admin" aria-expanded="true" aria-controls="admin">
+            <i class="fas fa-building"></i>
+            <span>Gym Admin</span>
+          </a>
+          <div id="admin" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="{% url 'users' %}">Users</a>
+              <a class="collapse-item" href="{% url 'trainers' %}">Trainers</a>
+            </div>
+          </div>
+        </li>
+        {% endif %}
+        {% endfor %}
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+  
+        <!-- Heading -->
+        <div class="sidebar-heading">
+          OPERATION
+        </div>
+  
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#growth" aria-expanded="true" aria-controls="growth">
+            <i class="fas fa-users-cog"></i>
+            <span>Member</span>
+          </a>
+          <div id="growth" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            {% for group in user.groups.all %}
+            {% if group.name == 'admin' or group.name == 'user' %}
+            <div class="bg-white py-2 collapse-inner rounded">
+              <div class="collapse-divider"></div>
+              <a class="collapse-item" href="{% url 'members' %}">Active</a>
+              <a class="collapse-item" href="{% url 'members_inactive' %}">Inactive</a>
+            </div>
+            {% endif %}
+          {% endfor %}
+          </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#transaction" aria-expanded="true" aria-controls="transaction">
+            <i class="fa fa-list"></i>
+            <span>Transaction</span>
+          </a>
+          <div id="transaction" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            {% for group in user.groups.all %}
+            {% if group.name == 'admin' or group.name == 'user' %}
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="{% url 'incomes' %}">Income</a>
+              <a class="collapse-item" href="{% url 'expenses' %}">Expense</a>
+            </div>
+            {% endif %}
+          {% endfor %}
+          </div>
+        </li>
+  
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+  
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+  
+      </ul>
+      <!-- End of Sidebar -->

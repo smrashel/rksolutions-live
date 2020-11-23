@@ -1,0 +1,159 @@
+{% load mathfilters %}
+<div class="row">
+
+  <!-- Growth Quality Status Card -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-primary shadow h-100 py-2">
+    <div class="card-body">
+        <div class="row no-gutters align-items-center">
+        <div class="col mr-2">
+            <div class="text-xs text-center font-weight-bold text-primary text-uppercase mb-1">Member</div>
+            <div class="overflow-auto">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Status</th>
+                        <th scope="col">Count</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                          <th>Active</th>
+                          <td>{{ active_member.amount }}</td>
+                      </tr>
+                      <tr>
+                          <th>Inactive</th>
+                          <td>{{ inactive_member.amount }}</td>
+                      </tr>
+                      <tr>
+                          <th>Total</th>
+                          <td>{{ active_member.amount|add:inactive_member.amount }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+  </div>
+
+
+
+  <!-- Growth Growth Status Card -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-info shadow h-100 py-2">
+    <div class="card-body">
+        <div class="row no-gutters align-items-center">
+        <div class="col mr-2">
+            <div class="text-xs text-center font-weight-bold text-info text-uppercase mb-1">Income</div>
+            <div class="overflow-auto">
+              <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Period</th>
+                      <th scope="col">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <th>Today</th>
+                          <td>{{ income_today.amount }}</td>
+                      </tr>
+                      <tr>
+                          <th>This Month</th>
+                          <td>{{ income_month.amount }}</td>
+                      </tr>
+                      <tr>
+                          <th>This Year</th>
+                          <td>{{ income_year.amount }}</td>
+                      </tr>
+                  </tbody>
+                </table>
+          </div>
+        </div>
+        </div>
+    </div>
+    </div>
+  </div>
+
+
+  <!-- Growth Connection Status Card -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-success shadow h-100 py-2">
+    <div class="card-body">
+        <div class="row no-gutters align-items-center">
+        <div class="col mr-2">
+            <div class="text-xs text-center font-weight-bold text-success text-uppercase mb-1">Expense</div>
+            <div class="overflow-auto">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Period</th>
+                        <th scope="col">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                          <th>Today</th>
+                          <td>{{ expense_today.amount }}</td>
+                      </tr>
+                      <tr>
+                          <th>This Month</th>
+                          <td>{{ expense_month.amount}}</td>
+                      </tr>
+                      <tr>
+                          <th>This Year</th>
+                          <td>{{ expense_year.amount }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+  </div>
+
+
+
+  <!-- OMS Percentage Card -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-warning shadow h-100 py-2">
+    <div class="card-body">
+        <div class="row no-gutters align-items-center">
+        <div class="col mr-2">
+            <div class="text-xs text-center font-weight-bold text-warning text-uppercase mb-1">Balance</div>
+            <div class="overflow-auto">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Period</th>
+                        <th scope="col">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                          <th>Today</th>
+                          <td>{{ income_today.amount }}</td>
+                      </tr>
+                      <tr>
+                          <th>This Month</th>
+                          <td>{{ income_month.amount|sub:expense_month.amount }}</td>
+                      </tr>
+                      <tr>
+                          <th>This Year</th>
+                          <td>{{ income_year.amount|sub:expense_year.amount }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+  </div>
+
+</div>
+
+{% include 'gyms/payment_due.html' %}

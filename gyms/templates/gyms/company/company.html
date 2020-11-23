@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Company</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/login.css' %}">
+</head>
+    <body>
+        <form class="box" action="" method="POST" autocomplete="off" id="myForm">
+            {% csrf_token %}
+            <h1>{{ heading }}</h1>
+            {{ form.as_p }}            
+            <input type="submit" name="submit" value="Register">
+            <p>Already have an account? <a href="{% url 'login' %}" type="button">Login</a></p>
+        </form>
+    </body>
+</html>

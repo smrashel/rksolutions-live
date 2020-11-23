@@ -1,0 +1,80 @@
+{% extends 'gyms/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">               
+                        <div class="profile-img">
+                            <img src="{{ member.member_pic.url }}" style="height: 250px;" alt="member-picture"/>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Member Id</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{member.member_id}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{member.name}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Contact Nnumber</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{member.contact_number}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Height in Inches</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{member.height}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Weight in Kgs</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{member.weight}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>NID Number</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{member.nid_number}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Email Address</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{member.email_address}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+{% endblock %}

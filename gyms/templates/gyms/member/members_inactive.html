@@ -1,0 +1,81 @@
+{% extends 'gyms/main.html' %}
+
+{% load widget_tweaks %}
+
+
+{% block content %}
+
+    <div class="card text-black mb-3">
+        <h5 class="card-header text-center">INACTIVE MEMBERS
+            {% for group in user.groups.all %}
+              {% if group.name == 'admin' %}
+                <a href="{% url 'member_create' %}" class="btn btn-warning">
+                    <i class="fas fa-plus"></i>
+                </a>
+              {% endif %}
+            {% endfor %}
+        </h5>
+        <div class="card-body">
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                {{ message }}
+                </div>
+            {% endfor %}
+            <br>
+
+
+
+            <div align="center" style="overflow:auto">
+                <table id="myTable" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Member Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Joining Date</th>
+                            <th scope="col">Added By</th>
+                            <th scope="col">Updated By</th>
+                            {% for group in user.groups.all %}
+                              {% if group.name == 'admin' or group.name == 'user' %}
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                              {% endif %}
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for member in members %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'member_detail' member.id %}" type="button" class="update-book btn btn-sm btn-info">
+                                {{ member.member_id }}
+                                </a>
+                            </td>
+                            <td>{{ member.name }}</td>
+                            <td>{{ member.contact_number }}</td>
+                            <td>{{ member.joining_date }}</td>
+                            <td>{{ member.added_by }}</td>
+                            <td>{{ member.updated_by }}</td>
+                            {% for group in user.groups.all %}
+                              {% if group.name == 'admin' or group.name == 'user' %}
+                            <td class="text-center">
+                                <a href="{% url 'member_update' member.id %}" type="button" class="update-book btn btn-sm btn-primary">
+                                  <i class="far fa-edit"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="{% url 'member_delete' member.id %}" type="button" class="update-book btn btn-sm btn-danger">
+                                  <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                              {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -7,21 +7,21 @@
 
     <div class="card text-black mb-3">
         <h5 class="card-header text-center">INCOMES
-            <!-- {% for group in user.groups.all %}
+            {% for group in user.groups.all %}
               {% if group.name == 'admin' %}
                 <a href="{% url 'income_create' %}" class="btn btn-warning">
                     <i class="fas fa-plus"></i>
                 </a>
               {% endif %}
-            {% endfor %} -->
+            {% endfor %}
         </h5>
         <div class="card-body">
-            <!-- {% for message in messages %}
+            {% for message in messages %}
                 <div class="alert alert-success" role="alert">
                 {{ message }}
                 </div>
             {% endfor %}
-            <br> -->
+            <br>
             <form action="{% url 'incomes' %}" method="POST" autocomplete="off">
               {% csrf_token %}
               <br>

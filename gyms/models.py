@@ -32,7 +32,7 @@ class CustomUser(AbstractUser):
 
 class Member(models.Model): 
     gym = models.ForeignKey(Company, on_delete=models.CASCADE, verbose_name='Gym Name', null=True, blank=True)
-    member_id = models.CharField('Member Id', max_length = 6, unique = True, null = True, blank = True)
+    member_id = models.CharField('Member Id', max_length = 6, null = True, blank = True)
     name = models.CharField('Member Name', max_length = 200)
     contact_number = models.CharField('Contact Number', max_length = 16, unique = True, null = True, blank = True)
     nid_number = models.CharField('NID Number', max_length = 16, unique = True, null = True, blank = True)
@@ -66,8 +66,8 @@ class Trainer(models.Model):
     name = models.CharField('Member Name', max_length = 200)
     contact_number = models.CharField('Contact Number', max_length = 16, unique = True, null = True, blank = True)
     email_address = models.EmailField('Email', max_length = 200, unique = True, null = True, blank = True)
-    height = models.CharField('Height in Inc', max_length = 3, unique = True, null = True, blank = True)
-    weight = models.CharField('Weight in Kg', max_length = 3, unique = True, null = True, blank = True)
+    height = models.CharField('Height in Inc', max_length = 3, null = True, blank = True)
+    weight = models.CharField('Weight in Kg', max_length = 3, null = True, blank = True)
     joining_date = models.DateField('Joining Date', null = True, blank = True)
     is_active = models.BooleanField('Active', default = True)
     added_by = models.ForeignKey(

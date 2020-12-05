@@ -35,11 +35,12 @@ section{
     padding: 0 80px;
     margin: auto;
 }
-.about, .services, .skills, .teams, .contact, footer{
+.about, .services, .projects, .skills, .teams, .contact, footer{
     font-family: 'Poppins', sans-serif;
 }
 .about .about-content, 
 .services .serv-content,
+.projects .pro-content,
 .skills .skills-content,
 .contact .contact-content{
     display: flex;
@@ -368,10 +369,10 @@ section .title::after{
     width: 60%;
 }
 .skills-content .right .python::before{
-    width: 70%;
+    width: 80%;
 }
 .skills-content .right .php::before{
-    width: 70%;
+    width: 80%;
 }
 
 /* teams section styling */

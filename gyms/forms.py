@@ -100,6 +100,9 @@ class TrainerForm(ModelForm):
 
 
 class IncomeForm(ModelForm):
+    def __init__(self, company_name, *args, **kwargs):
+        super (IncomeForm,self ).__init__(*args,**kwargs) # populates the post
+        self.fields['member'].queryset = Member.objects.filter(gym = company_name, is_active = True)
     class Meta:
         model = Income
         widgets = {

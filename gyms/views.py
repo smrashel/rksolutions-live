@@ -6,6 +6,7 @@ from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Count, Sum
+from django.utils import timezone
 
 from .forms import *
 from .forms import *
@@ -22,7 +23,7 @@ def register_company(request):
         form = CompanyForm(request.POST)
         if form.is_valid():
             fs = form.save(commit=False)
-            fs.joining_date = datetime.now()
+            fs.joining_date = timezone.now()
             fs.save()
             request.session['company_contact'] = form.cleaned_data.get('contact_number')
 
@@ -41,7 +42,7 @@ def update_company(request):
         if form.is_valid():
             fs = form.save(commit=False)
             fs.updated_by = request.user
-            fs.updated_date = datetime.now()
+            fs.updated_date = timezone.now()
             fs.save()
 
             return redirect('home')
@@ -207,7 +208,7 @@ def member_create(request):
             fs = form.save(commit=False)
             fs.gym = request.user.company_name
             fs.added_by = request.user
-            fs.added_date = datetime.now()
+            fs.added_date = timezone.now()
             fs.save()
 
             member = form.cleaned_data.get('name')
@@ -255,7 +256,7 @@ def member_income_create(request, pk):
             fs.member = member
             fs.gym = request.user.company_name
             fs.added_by = request.user
-            fs.added_date = datetime.now()
+            fs.added_date = timezone.now()
             fs.save()
 
             messages.success(request, 'Payment  was created for ' + member.name + '.')
@@ -279,7 +280,7 @@ def member_income_update(request, mb, ik):
             fs = form.save(commit=False)
             fs.member = member
             fs.updated_by = request.user
-            fs.updated_date = datetime.now()
+            fs.updated_date = timezone.now()
             fs.save()
 
             messages.success(request, 'Payment  was updated for ' + member.name + '.')
@@ -301,7 +302,7 @@ def member_update(request, pk):
         if form.is_valid():
             fs = form.save(commit=False)
             fs.updated_by = request.user
-            fs.updated_date = datetime.now()
+            fs.updated_date = timezone.now()
             fs.save()
 
             member = form.cleaned_data.get('name')
@@ -349,7 +350,7 @@ def trainer_create(request):
             fs = form.save(commit=False)
             fs.gym = request.user.company_name
             fs.added_by = request.user
-            fs.added_date = datetime.now()
+            fs.added_date = timezone.now()
             fs.save()
 
             trainer = form.cleaned_data.get('name')
@@ -372,7 +373,7 @@ def trainer_update(request, pk):
         if form.is_valid():
             fs = form.save(commit=False)
             fs.updated_by = request.user
-            fs.updated_date = datetime.now()
+            fs.updated_date = timezone.now()
             fs.save()
 
             trainer = form.cleaned_data.get('name')
@@ -424,16 +425,17 @@ def incomes(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin',])
 def income_create(request):
-    form = IncomeForm()
     heading = 'Create Payment'
+    company_name = request.user.company_name
+    form = IncomeForm(company_name)
 
     if request.method == 'POST':
-        form = IncomeForm(request.POST)
+        form = IncomeForm(company_name, request.POST)
         if form.is_valid():
             fs = form.save(commit=False)
             fs.gym = request.user.company_name
             fs.added_by = request.user
-            fs.added_date = datetime.now()
+            fs.added_date = timezone.now()
             fs.save()
 
             income = form.cleaned_data.get('member')
@@ -447,16 +449,17 @@ def income_create(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin',])
 def income_update(request, pk):
+    company_name = request.user.company_name
     income = get_object_or_404(Income, id=pk)
-    form = IncomeForm(instance=income)
+    form = IncomeForm(company_name, instance=income)
     heading = 'Update Payment'
 
     if request.method == 'POST':
-        form = IncomeForm(request.POST, instance=income)
+        form = IncomeForm(company_name, request.POST, instance=income)
         if form.is_valid():
             fs = form.save(commit=False)
             fs.updated_by = request.user
-            fs.updated_date = datetime.now()
+            fs.updated_date = timezone.now()
             fs.save()
 
             income = form.cleaned_data.get('member')
@@ -517,7 +520,7 @@ def expense_create(request):
             fs = form.save(commit=False)
             fs.gym = request.user.company_name
             fs.added_by = request.user
-            fs.added_date = datetime.now()
+            fs.added_date = timezone.now()
             fs.save()
 
             expense = form.cleaned_data.get('particular')
@@ -540,7 +543,7 @@ def expense_update(request, pk):
         if form.is_valid():
             fs = form.save(commit=False)
             fs.updated_by = request.user
-            fs.updated_date = datetime.now()
+            fs.updated_date = timezone.now()
             fs.save()
 
             expense = form.cleaned_data.get('particular')
